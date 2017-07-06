@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import request from 'supertest'
 import httpStatus from 'http-status'
-import TaskFactory from '../../models/taskFactory'
+import TaskFactory from '../../factory/taskFactory'
 import TaskStatus from '../../models/TaskStatus'
 import app from '../../../index'
 
