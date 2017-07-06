@@ -12,9 +12,7 @@ const TaskSchema = new mongoose.Schema({
   startTime: { type: Date, unique: false, default: Date.now },
   taskTime: { type: Number, unique: false },
   taskStatus: { type: Number, unique: false, default: TaskStatus.STARTED },
-  createdAt: { type: Date, default: Date.now },
-  location: { type: mongoose.Schema.Types.ObjectId, ref: 'Location' },
-  criteria: { type: mongoose.Schema.Types.ObjectId, ref: 'Location' },
+  createdAt: { type: Date, default: Date.now }
 })
 
 /**

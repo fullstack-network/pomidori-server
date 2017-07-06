@@ -16,8 +16,7 @@
   "scripts": {
     "dev": "NODE_ENV=development nodemon -w src --exec \"babel-node src --plugins add-module-exports --presets es2015,stage-0,stage-2\"",
     "build": "babel src -s -D -d dist --plugins add-module-exports --presets es2015,stage-0,stage-2",
-    "start": "node dist",
-    "prestart": "npm run -s build",
+    "start": "nodemon src/index.js --exec babel-node",
     "prettier": "prettier --semi false --print-width 120 --single-quote --trailing-comma all --write \"{src,__{tests,mocks}__}/**/*.js\"",
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -48,6 +47,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
+    "uuid": "^3.1.0",
     "winston": "2.3.0"
   },
   "devDependencies": {

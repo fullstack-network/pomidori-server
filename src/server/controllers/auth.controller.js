@@ -22,6 +22,8 @@ function login(req, res) {
  */
 function register(req, res, next) {
   User.register(new User({ email: req.body.email }), req.body.password, (err, user) => {
+    console.log(err)
+
     if (err) {
       const error = new APIError('Authentication error', httpStatus.UNAUTHORIZED)
       next(error)
