@@ -8,11 +8,11 @@ import APIError from '../helpers/APIError'
  * User Schema
  */
 const UserSchema = new mongoose.Schema({
-  _id: { type: String, default: uuidv4() },
+  _id: { type: String, default: uuidv4 },
   email: { type: String, unique: true },
-  push: { type: String, unique: true },
-  createdAt: { type: Date, default: Date.now },
-  role: { type: String, enum: ['user', 'agent', 'admin'], default: 'user' }
+  role: { type: String, enum: ['user', 'agent', 'admin'], default: 'user' },
+}, {
+  timestamps: true,
 })
 
 /**
