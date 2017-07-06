@@ -1,13 +1,8 @@
 import Task from './task.model';
 
 export default class TaskFactory {
-  static create(userId, taskTime) {
-    console.log(userId)
-
-    let task = new Task({
-      userId,
-      taskTime,
-    })
+  static create(taskObject) {
+    let task = new Task(taskObject);
 
     return task.save()
   }

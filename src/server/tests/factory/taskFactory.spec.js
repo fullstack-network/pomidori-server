@@ -20,7 +20,7 @@ describe('## Task APIs', () => {
   it('should create a new task', () => {
     expect.assertions(1);
 
-    return TaskFactory.create("xxx", 25).then(task => {
+    return TaskFactory.create({ userId: "xxx", taskTime: 25 }).then(task => {
       console.log(task);
       expect(task).toBeTruthy()
     }).catch((err) => {
@@ -31,11 +31,10 @@ describe('## Task APIs', () => {
   it('should create a new task with the default status', () => {
     expect.assertions(1);
 
-    return TaskFactory.create("xxx", 25).then(task => {
+    return TaskFactory.create({ userId: "xxx", taskTime: 25 }).then(task => {
       expect(task.taskStatus).toEqual(TaskStatus.STARTED);
     }).catch((err) => {
       console.log(err);
     });
   });
 });
-

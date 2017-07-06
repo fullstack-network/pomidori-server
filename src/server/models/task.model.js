@@ -8,6 +8,7 @@ import TaskStatus from './TaskStatus'
  */
 const TaskSchema = new mongoose.Schema({
   userId: { type: String, unique: false },
+  title: { type: String, unique: false },
   startTime: { type: Date, unique: false, default: Date.now },
   taskTime: { type: Number, unique: false },
   taskStatus: { type: Number, unique: false, default: TaskStatus.STARTED },
@@ -45,15 +46,6 @@ TaskSchema.statics = {
       const err = new APIError('No such user exists!', httpStatus.NOT_FOUND)
       return Promise.reject(err)
     })
-  },
-
-  create(userId, taskTime) {
-    let task = new Task({
-      userId,
-      taskTime,
-    })
-
-    return task.save();
   },
 
   /**
