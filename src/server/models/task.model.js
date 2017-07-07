@@ -2,17 +2,20 @@ import mongoose from 'mongoose'
 import httpStatus from 'http-status'
 import APIError from '../helpers/APIError'
 import TaskStatus from './TaskStatus'
+import uuidv4 from 'uuid/v4';
 
 /**
  * Task Schema
  */
 const TaskSchema = new mongoose.Schema({
+  _id: { type: String, default: uuidv4 },
   userId: { type: String, unique: false },
   title: { type: String, unique: false },
   startTime: { type: Date, unique: false, default: Date.now },
   taskTime: { type: Number, unique: false },
-  taskStatus: { type: Number, unique: false, default: TaskStatus.STARTED },
-  createdAt: { type: Date, default: Date.now }
+  taskStatus: { type: Number, unique: false, default: TaskStatus.STARTED }
+}, {
+  timestamps: true,
 })
 
 /**
