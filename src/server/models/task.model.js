@@ -28,8 +28,17 @@ const TaskSchema = new mongoose.Schema({
 /**
  * Methods
  */
-TaskSchema.method({})
+TaskSchema.methods.isExpired = function() {
+  if (this.taskStatus !== TaskStatus.STARTED) {
+    return false;
+  }
 
+  const now = new Date();
+  const diff = now - this.startTime;
+  const taskTimeMs = this.taskTime * 1000 * 60;
+
+  return diff >= taskTimeMs;
+};
 /**
  * Statics
  */
