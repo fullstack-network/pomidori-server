@@ -12,14 +12,23 @@ export default class TaskFactory {
   }
 
   static processOpenTasks() {
+    let promises = [];
+
     this.getAllOpenTasks().then((tasks) => {
       tasks.forEach((task) => {
         if (task.isExpired()) {
-          task.status = TaskStatus.FINISHED;
-          task.save();
+          task.taskStatus = TaskStatus.FINISHED;
+          promises.push(task.save());
         }
       })
     })
 
+    return new Promise((resolve, reject) => {
+      Promise.all(promises).then((p) => {
+        resolve(true);
+      }).catch((err) => {
+        reject(err);
+      });
+    });
   }
 }
