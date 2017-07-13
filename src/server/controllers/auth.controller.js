@@ -2,6 +2,7 @@ import httpStatus from 'http-status'
 import passport from 'passport'
 import APIError from '../helpers/APIError'
 import User from '../models/user.model'
+import jwt from 'jsonwebtoken';
 
 /**
  * Returns passport login response (cookie) when valid username and password is provided
@@ -24,13 +25,21 @@ function register(req, res, next) {
   User.register(new User({ email: req.body.email }), req.body.password, (err, user) => {
     console.log(err)
 
+
+    console.log(token)
+
     if (err) {
       const error = new APIError('Authentication error', httpStatus.UNAUTHORIZED)
       next(error)
     }
 
+    const token = jwt.sign({
+      userId: user._id,
+    }, "FAKE_SECRET");
+
     passport.authenticate('local')(req, res, () => {
-      res.json({ user })
+      const responseObject = Object.assign({}, { user }, { token })
+      res.json(responseObject)
     })
   })
 }
