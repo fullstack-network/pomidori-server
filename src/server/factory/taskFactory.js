@@ -11,6 +11,10 @@ export default class TaskFactory {
     return Task.where("taskStatus").eq(TaskStatus.STARTED).exec()
   }
 
+  static getAllOpenTasksForUser(userId) {
+    return Task.where("taskStatus").eq(TaskStatus.STARTED).where("userId").eq(userId).exec()
+  }
+
   static processOpenTasks() {
     let promises = [];
 

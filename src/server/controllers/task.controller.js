@@ -1,15 +1,11 @@
 import TaskFactory from '../factory/taskFactory'
-import jwt from 'jsonwebtoken'
-import { ExtractJwt } from 'passport-jwt'
 
 function create(req, res, next) {
-  const token = ExtractJwt.fromAuthHeader()(req);
-  const decoded = jwt.verify(token, 'FAKE_SECRET_CHANGE_ME');
 
   const taskObject = {
     taskTime: req.body.taskTime,
     title: req.body.title,
-    userId: decoded.userId,
+    userId: req.userId,
   };
 
   TaskFactory.create(taskObject).then((result) => {
@@ -19,7 +15,7 @@ function create(req, res, next) {
 
 
 function open(req, res, next) {
-  TaskFactory.getAllOpenTasks().then((tasks) => {
+  TaskFactory.getAllOpenTasksForUser(req.userId).then((tasks) => {
     res.json(tasks);
   });
 }
